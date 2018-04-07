@@ -50,6 +50,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -173,9 +174,13 @@ public class MainActivity extends AppCompatActivity {
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setIsSmartLockEnabled(false)
-                                    .setProviders(
-                                            AuthUI.EMAIL_PROVIDER,
-                                            AuthUI.GOOGLE_PROVIDER)
+                                    .setAvailableProviders(Arrays.asList(
+                                            new AuthUI.IdpConfig.EmailBuilder().build()//,
+                                            //new AuthUI.IdpConfig.PhoneBuilder().build(),
+                                            //new AuthUI.IdpConfig.GoogleBuilder().build(),
+                                            //new AuthUI.IdpConfig.FacebookBuilder().build(),
+                                            //new AuthUI.IdpConfig.TwitterBuilder().build()
+                                    ))
                                     .build(),
                             RC_SIGN_IN);
                 }
