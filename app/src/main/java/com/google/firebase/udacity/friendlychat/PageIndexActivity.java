@@ -186,4 +186,11 @@ public class PageIndexActivity extends AppCompatActivity {
         //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
+
+    public void toPollDescription(View view){
+        Intent intent = new Intent(this, PollDescriptionActivity.class);
+        String message = "Should we instead just do this in javascript?";
+        intent.putExtra(getString(R.string.poll_id), message);
+        startActivity(intent);
+    }
 }

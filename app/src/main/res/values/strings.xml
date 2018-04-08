@@ -2,4 +2,5 @@
     <string name="app_name">SmartVoter</string>
     <string name="sign_out">Sign Out</string>
     <string name="send_button_label">Send</string>
+    <string name="poll_id">POLLID</string>
 </resources>
