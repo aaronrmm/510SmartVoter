@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -176,5 +177,13 @@ public class PageIndexActivity extends AppCompatActivity {
 
     private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
+    }
+
+    public void toChat(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        //EditText editText = (EditText) findViewById(R.id.editText);
+        //String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 }
