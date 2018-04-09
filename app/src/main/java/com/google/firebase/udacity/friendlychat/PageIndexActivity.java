@@ -193,4 +193,19 @@ public class PageIndexActivity extends AppCompatActivity {
         intent.putExtra(getString(R.string.poll_id), message);
         startActivity(intent);
     }
+
+    public void toSubscriptionList(View view){
+        Intent intent = new Intent(this, SubscriptionListActivity.class);
+        startActivity(intent);
+    }
+
+    public void toSearchPolls(View view){
+        Intent intent = new Intent(this, SearchPollsActivity.class);
+        startActivity(intent);
+    }
+
+    public void toPollCreation(View view){
+        Intent intent = new Intent(this, PollCreationActivity.class);
+        startActivity(intent);
+    }
 }

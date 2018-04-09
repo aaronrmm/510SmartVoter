@@ -7,37 +7,42 @@
     android:layout_marginStart="@dimen/activity_horizontal_margin"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/photoImageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true" />
-
     <TextView
-        android:id="@+id/messageTextView"
-        android:layout_width="wrap_content"
+        android:id="@+id/nameTextView"
+        android:layout_width="235dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/authorTextView"
         android:layout_weight="0"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_below="@id/nameTextView"
         tools:text="Message" />
 
     <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="wrap_content"
+        android:id="@+id/authorTextView"
+        android:layout_width="233dp"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:text="Name" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/openButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/nameTextView"
         android:text="Button"
-        tools:text="Open"
-        android:visibility="visible" />
+        android:visibility="visible"
+        tools:text="Open" />
+
+    <Button
+        android:id="@+id/subscribeButton"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Button"
+        android:visibility="visible"
+        tools:text="+" />
 
 
 </RelativeLayout>
