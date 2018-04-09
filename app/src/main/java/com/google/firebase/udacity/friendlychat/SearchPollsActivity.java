@@ -11,9 +11,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchPollsActivity extends AppCompatActivity {
 
-    private ListView mMessageListView;
+    private ListView pollListView;
     private PollAdapter mPollAdaptor;
     private ProgressBar mProgressBar;
     // Firebase instance variables
@@ -31,8 +34,12 @@ public class SearchPollsActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("polls");
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mMessageListView = (ListView) findViewById(R.id.messageListView);
+        pollListView = (ListView) findViewById(R.id.pollListView);
 
+        // Initialize message ListView and its adapter
+        List<Poll> polls = new ArrayList<>();
+        mPollAdaptor = new PollAdapter(this, R.layout.item_poll, polls);
+        pollListView.setAdapter(mPollAdaptor);
         attachDatabaseReadListener();
     }
 

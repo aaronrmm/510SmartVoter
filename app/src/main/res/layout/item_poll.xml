@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/nameTextView"
+        android:id="@+id/titleTextView"
         android:layout_width="235dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/authorTextView"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/nameTextView"
+        android:layout_toRightOf="@+id/titleTextView"
         android:text="Button"
         android:visibility="visible"
         tools:text="Open" />
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Button"
+        android:text="+"
         android:visibility="visible"
         tools:text="+" />
 

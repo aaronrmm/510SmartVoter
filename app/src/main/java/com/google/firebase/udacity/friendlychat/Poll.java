@@ -15,39 +15,41 @@
  */
 package com.google.firebase.udacity.friendlychat;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Poll {
 
     private String author;
-    private String name;
+    private String title;
     private String description;
-    private ArrayList<String> options;
+    private String option1;
+    private String option2;
 
     public Poll() {
     }
 
-    public Poll(String author, String name, String description, ArrayList<String> options) {
+    public Poll(String author, String title, String description,  String option1, String option2) {
         this.setAuthor(author);
         this.setDescription(description);
-        this.setName(name);
-        this.setOptions(options);
+        this.setTitle(title);
+        this.setOption1(option1);
+        this.setOption2(option2);
     }
 
     public String getAuthor() {
         return author;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public void setAuthor(String author){
         this.author = author;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -58,11 +60,19 @@ public class Poll {
         this.description = description;
     }
 
-    public ArrayList<String> getOptions() {
-        return options;
+    public String getOption1() {
+        return option1;
     }
 
-    public void setOptions(ArrayList<String> options) {
-        this.options = options;
+    public void setOption1(String option1) {
+        this.option1 = option1;
+    }
+
+    public String getOption2() {
+        return option2;
+    }
+
+    public void setOption2(String option2) {
+        this.option2 = option2;
     }
 }

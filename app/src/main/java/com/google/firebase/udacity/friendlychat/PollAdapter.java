@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,12 +20,11 @@ public class PollAdapter extends ArrayAdapter<Poll> {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_poll, parent, false);
         }
 
-        ImageView photoImageView = (ImageView) convertView.findViewById(R.id.photoImageView);
-        TextView messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
-        TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
+        TextView titleTextView = (TextView) convertView.findViewById(R.id.titleTextView);
+        TextView authorTextView = (TextView) convertView.findViewById(R.id.authorTextView);
 
         Poll poll = getItem(position);
-        messageTextView.setText(poll.getName());
+        titleTextView.setText(poll.getTitle());
 
         authorTextView.setText(poll.getAuthor());
 
