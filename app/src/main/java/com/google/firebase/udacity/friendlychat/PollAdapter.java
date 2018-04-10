@@ -25,6 +25,9 @@ public class PollAdapter extends ArrayAdapter<Poll> {
 
         Poll poll = getItem(position);
         titleTextView.setText(poll.getTitle());
+        Object tag = poll.getDbKey();
+        convertView.setTag(tag);
+        Object gotTag = convertView.getTag();
 
         authorTextView.setText(poll.getAuthor());
 

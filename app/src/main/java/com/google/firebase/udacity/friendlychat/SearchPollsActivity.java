@@ -2,9 +2,12 @@ package com.google.firebase.udacity.friendlychat;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewParent;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +26,7 @@ public class SearchPollsActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,7 @@ public class SearchPollsActivity extends AppCompatActivity {
 
 
         // Initialize Firebase components
+        mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("polls");
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -48,7 +53,9 @@ public class SearchPollsActivity extends AppCompatActivity {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    String poll_id = dataSnapshot.getKey();
                     Poll poll = dataSnapshot.getValue(Poll.class);
+                    poll.setDbKey(poll_id);
                     mPollAdaptor.add(poll);
                 }
 
@@ -69,5 +76,14 @@ public class SearchPollsActivity extends AppCompatActivity {
             mMessagesDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
+    }
+
+    public void subscribe(View view){
+        String user_key = mFirebaseAuth.getCurrentUser().getUid();
+        View pollView = ((View)view.getParent());
+        String poll_key = (String)pollView.getTag();
+
+        DatabaseReference user_sub = mFirebaseDatabase.getReference().child("subscriptions").child(user_key).child(poll_key);
+        user_sub.setValue(true);
     }
 }

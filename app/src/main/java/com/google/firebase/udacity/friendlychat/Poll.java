@@ -19,12 +19,13 @@ import java.util.List;
 
 public class Poll {
 
+    public static final int DBKEY_TAG = 2543;
     private String author;
     private String title;
     private String description;
     private String option1;
     private String option2;
-
+    private String dbKey;
     public Poll() {
     }
 
@@ -74,5 +75,13 @@ public class Poll {
 
     public void setOption2(String option2) {
         this.option2 = option2;
+    }
+
+    public String getDbKey() {
+        return dbKey;
+    }
+
+    public void setDbKey(String dbKey) {
+        this.dbKey = dbKey;
     }
 }
