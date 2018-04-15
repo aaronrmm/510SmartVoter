@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/titleTextView"
-        android:text="Button"
+        android:text="Open"
         android:visibility="visible"
         tools:text="Open" />
 
