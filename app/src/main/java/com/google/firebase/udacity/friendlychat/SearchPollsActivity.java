@@ -121,7 +121,6 @@ public class SearchPollsActivity extends AppCompatActivity {
                                 // convert DataSnapshot into editable list
                                 for (DataSnapshot d : topics) {
                                     Poll poll = d.getValue(Poll.class);
-                                    System.out.println(d.getKey());
                                     poll.setDbKey(d.getKey());
                                     ps.add(poll);
                                 }
@@ -204,7 +203,6 @@ public class SearchPollsActivity extends AppCompatActivity {
                     String poll_id = dataSnapshot.getKey();
                     Poll poll = dataSnapshot.getValue(Poll.class);
                     poll.setDbKey(poll_id);
-                    System.out.println(poll.getDbKey());
                     mPollAdaptor.add(poll);
                     updateAdapter();
                 }
