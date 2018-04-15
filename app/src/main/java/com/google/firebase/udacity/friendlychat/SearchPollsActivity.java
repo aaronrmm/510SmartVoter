@@ -2,6 +2,7 @@ package com.google.firebase.udacity.friendlychat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,7 +51,6 @@ public class SearchPollsActivity extends AppCompatActivity {
         mPollAdaptor = new PollAdapter(this, R.layout.item_poll, polls);
         pollListView.setAdapter(mPollAdaptor);
         attachDatabaseReadListener();
-
     }
 
     @Override
@@ -118,7 +118,10 @@ public class SearchPollsActivity extends AppCompatActivity {
 
                                 // convert DataSnapshot into editable list
                                 for (DataSnapshot d : topics) {
-                                    ps.add(d.getValue(Poll.class));
+                                    Poll poll = d.getValue(Poll.class);
+                                    System.out.println(d.getKey());
+                                    poll.setDbKey(d.getKey());
+                                    ps.add(poll);
                                 }
 
                                 // check for exact title matches (top priority, will be first on list)
@@ -198,6 +201,7 @@ public class SearchPollsActivity extends AppCompatActivity {
                     String poll_id = dataSnapshot.getKey();
                     Poll poll = dataSnapshot.getValue(Poll.class);
                     poll.setDbKey(poll_id);
+                    System.out.println(poll.getDbKey());
                     mPollAdaptor.add(poll);
                     updateAdapter();
                 }

@@ -84,4 +84,13 @@ public class Poll {
     public void setDbKey(String dbKey) {
         this.dbKey = dbKey;
     }
+
+    public String toString() {
+        String str = "";
+        str += "Title: " + this.getTitle() + "\n";
+        str += "Author: " + this.getAuthor() + "\n";
+        str += "Description: " + this.getDescription() + "\n";
+        str += "DbKEY: " + this.getDbKey() + "\n";
+        return str;
+    }
 }
