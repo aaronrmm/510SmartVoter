@@ -95,16 +95,18 @@ public class SearchPollsActivity extends AppCompatActivity {
             }
         });
 
-        // Send button sends a message and clears the EditText
+        // Search button sends a message and clears the EditText
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Search for keyword in Topics and display
                 final String keyword = mSearchText.getText().toString();
                 if (keyword.equalsIgnoreCase("")) {
+                    //blank search, refresh list to default
                     finish();
                     startActivity(getIntent());
                 } else {
+                    //create a new list with topics ordered according to the entered keyword
                     polls.clear();
                     Query query = mMessagesDatabaseReference;
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -180,17 +182,18 @@ public class SearchPollsActivity extends AppCompatActivity {
                     mSearchText.setText("");
                 }
 
-                // hide keyboard
+                // hide keyboard after click
                 InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         });
 
+        /* Not needed?
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
+        }*/
     }
 
     private void attachDatabaseReadListener() {

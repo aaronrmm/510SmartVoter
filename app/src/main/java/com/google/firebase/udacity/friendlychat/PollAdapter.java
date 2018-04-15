@@ -30,6 +30,9 @@ public class PollAdapter extends ArrayAdapter<Poll> {
         super(context, resource, objects);
     }
 
+    /*
+        Will set up all of the Topic items (title, author, subscribe button) for the Topic List
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -49,6 +52,8 @@ public class PollAdapter extends ArrayAdapter<Poll> {
         Object gotTag = convertView.getTag();
         final Button subscribe = convertView.findViewById(R.id.subscribeButton);
 
+        //this will check the topic to see if the user is subscribed or not in order to set
+        //the topic button to the correct settings (add/delete)
         final String user_key = mFirebaseAuth.getCurrentUser().getUid();
         final String poll_key = tag.toString();
         DatabaseReference user_sub = mFirebaseDatabase.getReference().child("subscriptions").child(user_key).child(poll_key);
@@ -72,7 +77,8 @@ public class PollAdapter extends ArrayAdapter<Poll> {
                         subscribe.setText("+");
                     }
                 } catch (NullPointerException e) {
-                    //do nothing
+                    //do nothing, above may return null when a User has no record of
+                    //being subscribed or unsubscribed to a topic
                 }
             }
 
@@ -80,6 +86,11 @@ public class PollAdapter extends ArrayAdapter<Poll> {
             public void onCancelled(DatabaseError databaseError) {}
         });
 
+        /*
+            Sets the Click function for the Subscribe button.
+            Depending on the current Tag (y/n) the button will subscribe
+            or unsubscribe a user from the topic and flip the button.
+         */
         subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +117,9 @@ public class PollAdapter extends ArrayAdapter<Poll> {
         return convertView;
     }
 
+    /*
+        This method subscribes a user to a topic
+     */
     public void subscribeToTopic(View view) {
         String user_key = mFirebaseAuth.getCurrentUser().getUid();
         View pollView = ((View) view.getParent());
@@ -115,6 +129,9 @@ public class PollAdapter extends ArrayAdapter<Poll> {
         user_sub.setValue(true);
     }
 
+    /*
+        This method unsubscribes a user from a topic
+     */
     public void unsubscribeFromTopic(View view) {
         String user_key = mFirebaseAuth.getCurrentUser().getUid();
         View pollView = ((View) view.getParent());
