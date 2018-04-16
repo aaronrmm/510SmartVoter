@@ -36,6 +36,8 @@
             android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity android:name=".PollCreationActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity android:name=".Argument"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
     </application>
 
 </manifest>
