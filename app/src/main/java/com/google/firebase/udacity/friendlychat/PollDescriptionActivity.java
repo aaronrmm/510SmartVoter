@@ -5,6 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class PollDescriptionActivity extends AppCompatActivity {
 
     @Override
@@ -17,7 +29,34 @@ public class PollDescriptionActivity extends AppCompatActivity {
         String message = intent.getStringExtra(getString(R.string.poll_id));
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.editText);
-        textView.setText(message);
+
+        // Initialize Firebase components
+
+        FirebaseDatabase mFirebaseDatabase;
+        DatabaseReference mMessagesDatabaseReference;
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("polls").child(message);
+        final TextView titleView = (TextView) findViewById(R.id.titleEditText);
+        final TextView descriptionView = (TextView) findViewById(R.id.descriptionEditText);
+        final TextView option1View = (TextView) findViewById(R.id.option1EditText);
+        final TextView option2View = (TextView) findViewById(R.id.option2EditText);
+
+        mMessagesDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Poll poll = dataSnapshot.getValue(Poll.class);
+                System.out.print(poll);
+                titleView.setText(poll.getTitle());
+                descriptionView.setText(poll.getDescription());
+                option1View.setText(poll.getOption1());
+                option2View.setText(poll.getOption2());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }
