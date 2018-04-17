@@ -240,4 +240,12 @@ public class SearchPollsActivity extends AppCompatActivity {
         DatabaseReference user_sub = mFirebaseDatabase.getReference().child("subscriptions").child(user_key).child(poll_key);
         user_sub.setValue(true);
     }
+
+    public void openPoll(View view){
+        View pollView = ((View)view.getParent());
+        String poll_key = (String)pollView.getTag();
+        Intent intent = new Intent(this, PollDescriptionActivity.class);
+        intent.putExtra(getString(R.string.poll_id), poll_key);
+        startActivity(intent);
+    }
 }
