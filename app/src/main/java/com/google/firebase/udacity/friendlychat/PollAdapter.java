@@ -18,16 +18,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PollAdapter extends ArrayAdapter<Poll> {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
+    private Map<String, Poll>map;
 
     public PollAdapter(Context context, int resource, List<Poll> objects) {
         super(context, resource, objects);
+        map = new HashMap<String, Poll>();
     }
 
     /*
@@ -38,7 +42,6 @@ public class PollAdapter extends ArrayAdapter<Poll> {
         if (convertView == null) {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_poll, parent, false);
         }
-
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
@@ -140,4 +143,15 @@ public class PollAdapter extends ArrayAdapter<Poll> {
         DatabaseReference user_sub = mFirebaseDatabase.getReference().child("subscriptions").child(user_key).child(poll_key);
         user_sub.setValue(false);
     }
+    public Poll getPoll(String poll_id){
+        return map.get(poll_id);
+    }
+    @Override public void add(Poll poll){
+        super.add(poll);
+        map.put(poll.getDbKey(), poll);
+    }
+    public void remove(String poll_id){
+        this.remove(getPoll(poll_id));
+    }
+
 }
