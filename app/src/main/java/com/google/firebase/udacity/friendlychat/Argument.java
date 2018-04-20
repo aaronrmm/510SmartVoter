@@ -1,5 +1,6 @@
 package com.google.firebase.udacity.friendlychat;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ public class Argument extends AppCompatActivity {
     private ListView listview;
     private Button button;
     private EditText etText;
+    private String poll_key;
 
     //Firebase
     private DatabaseReference mDatabase;
@@ -33,7 +35,11 @@ public class Argument extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_argument);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Arguements");
+
+        Intent intent = getIntent();
+        poll_key = intent.getStringExtra(getString(R.string.poll_id));
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("polls").child(poll_key).child("arguments");
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
