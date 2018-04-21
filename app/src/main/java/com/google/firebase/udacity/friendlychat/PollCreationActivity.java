@@ -95,9 +95,13 @@ public class PollCreationActivity extends AppCompatActivity {
         String option2 = mOption2Text.getText().toString();
 
         Poll poll = new Poll(author, title, description, option1, option2);
-        mDatabaseReference.push().setValue(poll);
+        DatabaseReference push = mDatabaseReference.push();
+        push.setValue(poll);
 
-        //TODO subscribe user to poll
+        String poll_key = push.getKey();
+        String user_key = user.getUid();
+        DatabaseReference user_sub = mFirebaseDatabase.getReference().child("subscriptions").child(user_key).child(poll_key);
+        user_sub.setValue(true);
 
         //send user back to subscribed polls list
         Intent intent = new Intent(this, SubscriptionListActivity.class);
