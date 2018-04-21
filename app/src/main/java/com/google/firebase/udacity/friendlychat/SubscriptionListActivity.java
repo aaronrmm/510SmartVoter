@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SubscriptionListActivity extends AppCompatActivity {
+public class SubscriptionListActivity extends RestrictedActivity {
 
     public static final String ANONYMOUS = "anonymous";
     private ListView pollListView;
@@ -37,7 +37,6 @@ public class SubscriptionListActivity extends AppCompatActivity {
     private DatabaseReference mDBSubReference;
     private ChildEventListener mChildEventListener;
     private ChildEventListener mSubListener;
-    private FirebaseAuth mFirebaseAuth;
     private List<Poll> polls;
 
     @Override
@@ -48,8 +47,6 @@ public class SubscriptionListActivity extends AppCompatActivity {
         // Initialize Firebase components
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        String userid = mFirebaseAuth.getCurrentUser().getUid();
-        mDBSubReference = mFirebaseDatabase.getReference().child("subscriptions").child(userid);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         pollListView = (ListView) findViewById(R.id.pollListView);
 
@@ -57,6 +54,12 @@ public class SubscriptionListActivity extends AppCompatActivity {
         polls = new ArrayList<>();
         mPollAdaptor = new PollAdapter(this, R.layout.item_poll, polls);
         pollListView.setAdapter(mPollAdaptor);
+    }
+
+    @Override
+    public void onSignedInInitialize(String username) {
+        String userid = mFirebaseAuth.getCurrentUser().getUid();
+        mDBSubReference = mFirebaseDatabase.getReference().child("subscriptions").child(userid);
         attachSubscriptionListener();
     }
 
