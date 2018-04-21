@@ -134,6 +134,10 @@ public class SubscriptionListActivity extends AppCompatActivity {
     public void openSearchPolls(View view){
         Intent intent = new Intent(this, SearchPollsActivity.class);
         startActivity(intent);
+    }
 
+    public void openPollCreation(View view){
+        Intent intent = new Intent(this, PollCreationActivity.class);
+        startActivity(intent);
     }
 }
