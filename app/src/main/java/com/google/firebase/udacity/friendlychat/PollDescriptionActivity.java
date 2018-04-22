@@ -8,9 +8,9 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-//Temp for debugging
+/*TEMPORARY for debugging
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.DialogInterface;*/
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +32,8 @@ public class PollDescriptionActivity extends AppCompatActivity {
     private Button voteButton;
     private FirebaseAuth firebaseAuth;
     private String choice;
+    private String option1;
+    private String option2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,8 @@ public class PollDescriptionActivity extends AppCompatActivity {
                 descriptionView.setText(poll.getDescription());
                 choice1.setText(poll.getOption1());
                 choice2.setText(poll.getOption2());
+                option1 = choice1.getText().toString();
+                option2 = choice2.getText().toString();
                 voteButton.setEnabled(false); //disable until option is selected
             }
 
@@ -80,6 +84,32 @@ public class PollDescriptionActivity extends AppCompatActivity {
 
             }
         });
+
+         votesReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int count1 = 0;
+                    int count2 = 0;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Vote vote = snapshot.getValue(Vote.class);
+                        if (vote.getPollID().equals(poll_key) && vote.getUser().equals(firebaseAuth.getUid().toString())) {
+                            choice1.setEnabled(false);
+                            choice2.setEnabled(false);
+                            voteButton.setEnabled(false);
+                        }
+                        if (vote.getPollID().equals(poll_key) && vote.getVote().equals(option1)) {
+                            count1++;
+                        } else if (vote.getPollID().equals(poll_key) && vote.getVote().equals(option2)) {
+                            count2++;
+                        }
+                    }
+                    choice1.setText(option1 + ": " + count1);
+                    choice2.setText(option2 + ": " + count2);
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
 
 
         viewDiscussion.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +122,7 @@ public class PollDescriptionActivity extends AppCompatActivity {
         choice1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                choice = choice1.getText().toString();
+                choice = option1;
                 voteButton.setEnabled(true);
             }
         });
@@ -100,7 +130,7 @@ public class PollDescriptionActivity extends AppCompatActivity {
         choice2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                choice = choice2.getText().toString();
+                choice = option2;
                 voteButton.setEnabled(true);
             }
         });
@@ -108,6 +138,10 @@ public class PollDescriptionActivity extends AppCompatActivity {
         voteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //disable radio buttons and vote button once a vote is submitted
+                choice1.setEnabled(false);
+                choice2.setEnabled(false);
+                voteButton.setEnabled(false);
                 String uID = firebaseAuth.getUid().toString();
 
                 //create new vote object and save to database
@@ -115,22 +149,26 @@ public class PollDescriptionActivity extends AppCompatActivity {
                 DatabaseReference push = votesReference.push();
                 push.setValue(vote);
 
-                voteButton.setEnabled(false); //disable now that vote is in
+                //String vote_key = push.getKey();
 
-                /*TEMP for debugging
-                AlertDialog alertDialog = new AlertDialog.Builder(PollDescriptionActivity.this).create();
-                alertDialog.setTitle("Alert");
-                alertDialog.setMessage("Push: " + push + ", Vote: " + vote.getUser() + " " +  vote.getPollID() + " " +  vote.getVote());
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();*/
             }
         });
     }
+
+    /* TEMPORARY for Debugging
+    public void sendAlert(String message) {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(PollDescriptionActivity.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                     }
+                });
+        alertDialog.show();
+    }*/
 
     public void openDiscussion(View view){
         Intent intent = new Intent(this, Argument.class);
