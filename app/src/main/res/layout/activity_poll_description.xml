@@ -15,14 +15,13 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:onClick="openDiscussion"
         android:text="Read Discussion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/nameInputLayout"
+    <TextView
+        android:id="@+id/titleText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
@@ -30,76 +29,61 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/titleEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Title" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/postPollButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionInputLayout"
-        app:layout_constraintLeft_toRightOf="@+id/leftOption">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/option2EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Option 2 (e.g. yes)" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/leftOption"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/postPollButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionInputLayout"
-        app:layout_constraintRight_toLeftOf="@+id/textInputLayout3">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/option1EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Option 1 (e.g. yes)" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/descriptionInputLayout"
+    <TextView
+        android:id="@+id/descriptionText"
         android:layout_width="0dp"
-        android:layout_height="309dp"
+        android:layout_height="270dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nameInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/descriptionEditText"
-            android:layout_width="match_parent"
+    <RadioGroup
+        android:id="@+id/choices"
+        android:layout_marginLeft="8dp"
+        android:layout_height="125dp"
+        android:layout_width="175dp"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="334dp"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText"
+        app:layout_constraintLeft_toLeftOf="parent" >
+
+        <RadioButton
+            android:id="@+id/choice1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Description" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_weight="1"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/choice2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/voteButton"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="VOTE!"
+        android:textSize="32sp"
+        app:layout_constraintLeft_toRightOf="@+id/choices"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
 
 </android.support.constraint.ConstraintLayout>
