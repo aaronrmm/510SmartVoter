@@ -14,8 +14,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Arrays;
-
 public class PollCreationActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
@@ -83,12 +81,19 @@ public class PollCreationActivity extends AppCompatActivity {
         });
     }
 
+    //Gets the name for this user
+    protected String getName(FirebaseUser user) {
+        String author = "";
+        if (user!=null) {
+            author = user.getDisplayName();
+        }
+        return author;
+    }
+
     public void postPoll(View view){
         //create new poll
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        String author = "";
-        if (user!=null)
-            author =  user.getDisplayName();
+        String author = getName(user);
         String title = mTitleText.getText().toString();
         String description = mDescriptionText.getText().toString();
         String option1 = mOption1Text.getText().toString();

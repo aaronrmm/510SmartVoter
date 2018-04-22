@@ -2,53 +2,62 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="70dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginStart="@dimen/activity_horizontal_margin"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="5dp">
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="235dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/authorTextView"
-        android:layout_weight="0"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        tools:text="Message" />
-
-    <TextView
-        android:id="@+id/authorTextView"
-        android:layout_width="233dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        tools:text="Name" />
-
-    <Button
+    <RelativeLayout
+        android:clickable="true"
         android:id="@+id/openButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/subscribeButton"
-        android:onClick="openPoll"
-        android:text="Open"
+        android:onClick="openPoll">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/authorTextView"
+            android:layout_weight="0"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:text="Message" />
+
+        <TextView
+            android:id="@+id/authorTextView"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            tools:text="Name" />
         android:visibility="visible"
         tools:text="Open" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/subscribeButton"
-        android:layout_width="44dp"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         app:layout_constraintRight_toRightOf="parent"
         android:onClick="subscribe"
         android:text="+"
         android:visibility="visible"
         android:tag="n"
         tools:text="+" />
+        <!--android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"-->
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 
 
 </RelativeLayout>

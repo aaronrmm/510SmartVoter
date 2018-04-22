@@ -6,17 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class PollDescriptionActivity extends AppCompatActivity {
 
@@ -52,6 +46,7 @@ public class PollDescriptionActivity extends AppCompatActivity {
                 descriptionView.setText(poll.getDescription());
                 option1View.setText(poll.getOption1());
                 option2View.setText(poll.getOption2());
+
             }
 
             @Override
