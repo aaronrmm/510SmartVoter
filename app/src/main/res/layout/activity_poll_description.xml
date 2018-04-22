@@ -7,7 +7,7 @@
     tools:context=".PollDescriptionActivity">
 
     <Button
-        android:id="@+id/postPollButton"
+        android:id="@+id/viewDiscussionButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

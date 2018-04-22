@@ -15,7 +15,9 @@
  */
 package com.google.firebase.udacity.friendlychat;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Poll {
 
@@ -29,7 +31,7 @@ public class Poll {
     public Poll() {
     }
 
-    public Poll(String author, String title, String description,  String option1, String option2) {
+    public Poll(String author, String title, String description, String option1, String option2) {
         this.setAuthor(author);
         this.setDescription(description);
         this.setTitle(title);
